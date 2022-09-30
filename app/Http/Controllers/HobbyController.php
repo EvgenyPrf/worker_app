@@ -10,4 +10,28 @@ class HobbyController extends Controller
     {
         return 'This is HobbyController';
     }
+    public function show()
+    {
+
+    }
+
+    public function create()
+    {
+
+    }
+
+    public function store()
+    {
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete()
+    {
+
+    }
 }

@@ -10,4 +10,28 @@ class CityController extends Controller
     {
         return 'This is CityController';
     }
+    public function show()
+    {
+
+    }
+
+    public function create()
+    {
+
+    }
+
+    public function store()
+    {
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete()
+    {
+
+    }
 }

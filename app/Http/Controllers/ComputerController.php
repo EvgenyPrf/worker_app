@@ -10,4 +10,28 @@ class ComputerController extends Controller
     {
         return 'This is ComputerController';
     }
+    public function show()
+    {
+
+    }
+
+    public function create()
+    {
+
+    }
+
+    public function store()
+    {
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete()
+    {
+
+    }
 }

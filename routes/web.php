@@ -41,11 +41,13 @@ Route::get('cities/update', [\App\Http\Controllers\CityController::class, 'updat
 Route::get('cities/delete', [\App\Http\Controllers\CityController::class, 'delete']);
 
 
-Route::get('clients', [\App\Http\Controllers\ClientController::class, 'index']);
-Route::get('clients/show', [\App\Http\Controllers\ClientController::class, 'show']);
-Route::get('clients/create', [\App\Http\Controllers\ClientController::class, 'create']);
-Route::get('clients/update', [\App\Http\Controllers\ClientController::class, 'update']);
-Route::get('clients/delete', [\App\Http\Controllers\ClientController::class, 'delete']);
+Route::get('clients', [\App\Http\Controllers\ClientController::class, 'index'])->name('client.index');
+Route::get('clients/create', [\App\Http\Controllers\ClientController::class, 'create'])->name('client.create');
+Route::get('clients/show/{client}', [\App\Http\Controllers\ClientController::class, 'show'])->name('client.show');
+Route::post('clients', [\App\Http\Controllers\ClientController::class, 'store'])->name('client.store');
+Route::get('clients/{client}/edit', [\App\Http\Controllers\ClientController::class, 'edit'])->name('client.edit');
+Route::patch('clients/{client}', [\App\Http\Controllers\ClientController::class, 'update'])->name('client.update');
+Route::delete('clients/{client}', [\App\Http\Controllers\ClientController::class, 'delete'])->name('client.delete');
 
 
 Route::get('computers', [\App\Http\Controllers\ComputerController::class, 'index']);
