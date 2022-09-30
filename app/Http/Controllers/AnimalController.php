@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Animal\StoreRequest;
+use App\Http\Requests\Animal\UpdateRequest;
 use App\Models\Animal;
 use Illuminate\Http\Request;
 
@@ -10,61 +12,44 @@ class AnimalController extends Controller
     public function index()
     {
         $animals = Animal::all();
-        dd($animals->toArray());
+        return view('animal.index', compact('animals'));
     }
 
-    public function show()
+    public function show(Animal $animal)
     {
-        $animal = Animal::first();
-        dd($animal->toArray());
+        return view('animal.show', compact('animal'));
     }
 
     public function create()
     {
-        $animal1 = [
-            'nickname' => 'Pushok',
-            'title' => 'Horse',
-            'sex' => 'male',
-            'age' => '8',
-            'growth' => '190',
-            'description' => 'Horse from north Carolina'
-        ];
-
-        $animal2 = [
-            'nickname' => 'Raketa',
-            'title' => 'dog',
-            'sex' => 'female',
-            'age' => '6',
-            'growth' => '60',
-            'description' => 'Dog from north Carolina'
-        ];
-
-        Animal::create($animal1);
-        Animal::create($animal2);
-
-        return 'Animals created!!!';
-
+        return view('animal.create');
     }
 
-    public function update()
+    public function store(StoreRequest $request)
     {
-        $animal = Animal::find(1);
-        $animal->update(
-            [
-                'nickname' => 'Saharok'
-            ]
-        );
-        return 'Animal updated!';
+        $data = $request->validated();
+        $data['is_predator'] = isset($data['is_predator']);
+        Animal::create($data);
+        return redirect()->route('animal.index');
     }
 
-    public function delete()
+    public function update(UpdateRequest $request, Animal $animal)
     {
-        $animal = Animal::find(2);
+        $data = $request->validated();
+        $data['is_predator'] = isset($data['is_predator']);
+        $animal->update($data);
+        return redirect()->route('animal.show', $animal->id);
+    }
 
+    public function edit(Animal $animal)
+    {
+        return view('animal.edit', compact('animal'));
+    }
+
+    public function delete(Animal $animal)
+    {
         $animal->delete();
-
-        return $animal->nickname . ' was deleted';
-
+        return redirect()->route('animal.index');
     }
 
 }

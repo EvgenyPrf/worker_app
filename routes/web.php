@@ -17,11 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('animals', [\App\Http\Controllers\AnimalController::class, 'index']);
-Route::get('animals/show', [\App\Http\Controllers\AnimalController::class, 'show']);
-Route::get('animals/create', [\App\Http\Controllers\AnimalController::class, 'create']);
-Route::get('animals/update', [\App\Http\Controllers\AnimalController::class, 'update']);
-Route::get('animals/delete', [\App\Http\Controllers\AnimalController::class, 'delete']);
+Route::get('animals', [\App\Http\Controllers\AnimalController::class, 'index'])->name('animal.index');
+Route::get('animals/create', [\App\Http\Controllers\AnimalController::class, 'create'])->name('animal.create');
+Route::get('animals/show/{animal}', [\App\Http\Controllers\AnimalController::class, 'show'])->name('animal.show');
+Route::post('animals', [\App\Http\Controllers\AnimalController::class, 'store'])->name('animal.store');
+Route::get('animals/{animal}/edit', [\App\Http\Controllers\AnimalController::class, 'edit'])->name('animal.edit');
+Route::patch('animals/{animal}', [\App\Http\Controllers\AnimalController::class, 'update'])->name('animal.update');
+Route::delete('animals/{animal}', [\App\Http\Controllers\AnimalController::class, 'delete'])->name('animal.delete');
 
 
 
