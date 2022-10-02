@@ -34,11 +34,13 @@ Route::get('cars/update', [\App\Http\Controllers\CarController::class, 'update']
 Route::get('cars/delete', [\App\Http\Controllers\CarController::class, 'delete']);
 
 
-Route::get('cities', [\App\Http\Controllers\CityController::class, 'index']);
-Route::get('cities/show', [\App\Http\Controllers\CityController::class, 'show']);
-Route::get('cities/create', [\App\Http\Controllers\CityController::class, 'create']);
-Route::get('cities/update', [\App\Http\Controllers\CityController::class, 'update']);
-Route::get('cities/delete', [\App\Http\Controllers\CityController::class, 'delete']);
+Route::get('cities', [\App\Http\Controllers\CityController::class, 'index'])->name('city.index');
+Route::get('cities/create', [\App\Http\Controllers\CityController::class, 'create'])->name('city.create');
+Route::get('cities/show/{city}', [\App\Http\Controllers\CityController::class, 'show'])->name('city.show');
+Route::post('cities', [\App\Http\Controllers\CityController::class, 'store'])->name('city.store');
+Route::get('cities/{city}/edit', [\App\Http\Controllers\CityController::class, 'edit'])->name('city.edit');
+Route::patch('cities/{city}', [\App\Http\Controllers\CityController::class, 'update'])->name('city.update');
+Route::delete('cities/{city}', [\App\Http\Controllers\CityController::class, 'delete'])->name('city.delete');
 
 
 Route::get('clients', [\App\Http\Controllers\ClientController::class, 'index'])->name('client.index');
