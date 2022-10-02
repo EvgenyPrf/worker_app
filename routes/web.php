@@ -71,10 +71,11 @@ Route::get('hobbies/update', [\App\Http\Controllers\HobbyController::class, 'upd
 Route::get('hobbies/delete', [\App\Http\Controllers\HobbyController::class, 'delete']);
 
 
-Route::get('students', [\App\Http\Controllers\StudentController::class, 'index']);
-Route::get('students/show', [\App\Http\Controllers\StudentController::class, 'show']);
-Route::get('students/create', [\App\Http\Controllers\StudentController::class, 'create']);
-Route::get('students/update', [\App\Http\Controllers\StudentController::class, 'update']);
-Route::get('students/delete', [\App\Http\Controllers\StudentController::class, 'delete']);
-
+Route::get('students', [\App\Http\Controllers\StudentController::class, 'index'])->name('student.index');
+Route::get('students/create', [\App\Http\Controllers\StudentController::class, 'create'])->name('student.create');
+Route::get('students/show/{student}', [\App\Http\Controllers\StudentController::class, 'show'])->name('student.show');
+Route::post('students', [\App\Http\Controllers\StudentController::class, 'store'])->name('student.store');
+Route::get('students/edit', [\App\Http\Controllers\StudentController::class, 'edit'])->name('student.edit');
+Route::patch('students/{student}', [\App\Http\Controllers\StudentController::class, 'update'])->name('student.update');
+Route::delete('students/{student}', [\App\Http\Controllers\StudentController::class, 'delete'])->name('student.delete');
 
