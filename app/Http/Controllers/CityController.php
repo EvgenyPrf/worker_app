@@ -2,15 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\City\IndexRequest;
 use App\Http\Requests\City\StoreRequest;
 use App\Http\Requests\City\UpdateRequest;
 use App\Models\City;
 
 class CityController extends Controller
 {
-    public function index()
+    public function index(IndexRequest $request)
     {
-        $cities = City::all();
+        $data = $request->validated();
+        $cityQuery = City::query();
+        if(isset($data['id'])){
+            $cityQuery->where('id', '=', $data['id']);
+        }
+
+        if(isset($data['title'])){
+            $cityQuery->where('title', 'like', "%{$data['title']}%");
+        }
+
+        if(isset($data['population_from'])){
+            $cityQuery->where('population', '>', $data['population_from']);
+        }
+        if(isset($data['population_to'])){
+            $cityQuery->where('population', '<', $data['population_to']);
+        }
+        if(isset($data['yardage_from'])){
+            $cityQuery->where('yardage', '>', $data['yardage_from']);
+        }
+        if(isset($data['yardage_to'])){
+            $cityQuery->where('yardage', '<', $data['yardage_to']);
+        }
+
+        if(isset($data['is_capital'])){
+            $cityQuery->where('is_capital', true);
+        }
+
+        $cities = $cityQuery->paginate(2);
         return view('city.index', compact('cities'));
     }
     public function show(City $city)
