@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Animal\IndexRequest;
 use App\Http\Requests\Animal\StoreRequest;
 use App\Http\Requests\Animal\UpdateRequest;
 use App\Models\Animal;
@@ -9,9 +10,33 @@ use Illuminate\Http\Request;
 
 class AnimalController extends Controller
 {
-    public function index()
+    public function index(IndexRequest $request)
     {
-        $animals = Animal::all();
+        $data = $request->validated();
+        $animalQuery = Animal::query();
+
+        if(isset($data['id'])) {
+            $animalQuery->where('id', '=', $data['id']);
+        }
+        if(isset($data['nickname'])) {
+            $animalQuery->where('nickname', 'like', "%{$data['nickname']}%");
+        }
+        if(isset($data['age_from'])) {
+            $animalQuery->where('age', '>', $data['age_from']);
+        }
+        if(isset($data['age_to'])) {
+            $animalQuery->where('age', '<', $data['age_to']);
+        }
+
+        if(isset($data['sex'])) {
+            $animalQuery->where('sex', 'like', "%{$data['sex']}%");
+        }
+
+        if(isset($data['is_predator'])) {
+            $animalQuery->where('is_predator', true);
+        }
+
+        $animals = $animalQuery->paginate(2);
         return view('animal.index', compact('animals'));
     }
 
