@@ -29,8 +29,25 @@ class UpdateRequest extends FormRequest
             'sex' => 'required|string',
             'age' => 'required|integer',
             'growth' => 'required|integer',
-            'is_predator' => 'required|string',
+            'is_predator' => 'nullable|string',
             'description' => 'required|string',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nickname.string' => 'Поле должно содержать текст',
+            'title.required' => 'Заполните данное поле',
+            'title.string' => 'Поле должно содержать текст',
+            'sex.required' => 'Заполните данное поле',
+            'sex.string' => 'Поле должно содержать текст',
+            'age.required' => 'Заполните данное поле',
+            'age.integer' => 'Поле должно содержать число',
+            'growth.required' => 'Заполните данное поле',
+            'growth.integer' => 'Поле должно содержать число',
+            'description.string' => 'Поле должно содержать текст',
+            'description.required' => 'Заполните данное поле',
         ];
     }
 }
