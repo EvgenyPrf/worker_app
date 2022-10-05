@@ -1,13 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Client</title>
-</head>
-<body>
+@extends('layout.client')
+@section('content')
 <h3>All clients</h3>
 <a href="{{route('client.create')}}">Add client</a>
 <hr>
@@ -29,5 +21,4 @@
      </form>
      <hr>
 @endforeach
-</body>
-</html>
+@endsection
