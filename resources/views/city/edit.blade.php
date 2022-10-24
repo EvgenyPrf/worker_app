@@ -1,13 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>City</title>
-</head>
-<body>
+@extends('layout.city')
+@section('content')
 <form action="{{route('city.update', $city->id)}}" method="post">
     <h2>Change title</h2>
     @csrf
@@ -37,5 +29,4 @@
         <label for="isCapital">is Capital</label></div>
     <input type="submit" value="Save">
 </form>
-</body>
-</html>
+@endsection

@@ -1,13 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Animal</title>
-</head>
-<body>
+@extends('layout.animal')
+@section('content')
 <h3>Animal with id: {{$animal -> id}}</h3>
 <hr>
      <div>id: {{$animal->id}}</div>
@@ -20,5 +12,4 @@
      <div>description: {{$animal->description}}</div>
      <a href="{{route('animal.index')}}">Назад</a>
      <hr>
-</body>
-</html>
+@endsection

@@ -1,13 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>City</title>
-</head>
-<body>
+@extends('layout.city')
+@section('content')
 <h2>Cities list</h2>
 <div><a href="{{route('city.create')}}">Add new city to list</a></div>
 <hr>
@@ -40,10 +32,4 @@
 <hr>
 @endforeach
 <div class="my-nav">{{$cities->withQueryString()->links()}}</div>
-<style>
-    .my-nav svg{
-        width: 15px;
-    }
-</style>
-</body>
-</html>
+@endsection
