@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use App\Models\Position;
 use App\Models\Profile;
 use App\Models\Client;
+use App\Models\Project;
+use App\Models\ProjectWorker;
 use App\Models\Worker;
 use Illuminate\Console\Command;
 
@@ -31,11 +33,9 @@ class DevCommand extends Command
      */
     public function handle()
     {
-        //$this->prepareData();
-
-        $worker = Worker::find(7);
-        $position = Position::find(7);
-        dd($position->workers->toArray());
+//        $this->prepareData();
+        $project = Project::find(3);
+        dd($project->workers->toArray());
 
 
         return 0;
@@ -43,94 +43,61 @@ class DevCommand extends Command
 
     private function prepareData()
     {
-
-        $positionData1 = [
-            'title' => 'manager'
-        ];
-
-        $position1 = Position::create($positionData1);
-
-        $workersData1 = [
-                'name' => 'Masha',
-                'surname' => 'Ivanova',
-                'age' => '22',
-                'email' => 'mi@mail.ru',
-                'position_id' => $position1->id,
-
-        ];
-        $worker1 = Worker::create($workersData1);
+        $workerManager = Worker::find(5);
+        $workerDeveloper1 = Worker::find(7);
+        $workerDeveloper2 = Worker::find(8);
 
 
-        $positionData2 = [
-            'title' => 'boss'
-        ];
+        $project1 = Project::create([
+            'title' => 'Blog'
+        ]);
 
-        $position2 = Position::create($positionData2);
+        $project2 = Project::create([
+            'title' => 'Shop'
+        ]);
 
-        $workersData2 = [
-            'name' => 'Misha',
-            'surname' => 'Petrov',
-            'age' => '40',
-            'email' => 'misha@mail.ru',
-            'position_id' => $position2->id,
+        $project3 = Project::create([
+            'title' => 'Game'
+        ]);
 
-        ];
-        $worker2 = Worker::create($workersData2);
+        ProjectWorker::create([
+            'project_id' => $project1->id,
+            'worker_id' => $workerManager->id,
+        ]);
+        ProjectWorker::create([
+            'project_id' => $project1->id,
+            'worker_id' => $workerDeveloper1->id,
+        ]);
+        ProjectWorker::create([
+            'project_id' => $project1->id,
+            'worker_id' => $workerDeveloper2->id,
+        ]);
 
+        ProjectWorker::create([
+            'project_id' => $project2->id,
+            'worker_id' => $workerManager->id,
+        ]);
+        ProjectWorker::create([
+            'project_id' => $project2->id,
+            'worker_id' => $workerDeveloper1->id,
+        ]);
+        ProjectWorker::create([
+            'project_id' => $project2->id,
+            'worker_id' => $workerDeveloper2->id,
+        ]);
 
-        $positionData3 = [
-            'title' => 'developer'
-        ];
-
-        $position3 = Position::create($positionData3);
-
-        $workersData3 = [
-            'name' => 'Dima',
-            'surname' => 'Smirnov',
-            'age' => '26',
-            'email' => 'smirnov@mail.ru',
-            'position_id' => $position3->id,
-
-        ];
-        $worker3 = Worker::create($workersData3);
-
-
-        $workersData4 = [
-            'name' => 'Jack',
-            'surname' => 'Tiger',
-            'age' => '26',
-            'email' => 'tiger@mail.ru',
-            'position_id' => $position3->id,
-
-        ];
-        $worker4 = Worker::create($workersData4);
-
-
-
-
-
-//        $clientsData = [
-//            'name' => 'Petr',
-//            'surname' => 'Ivanov',
-//            'email' => 'ivanov@gmail.com',
-//            'tel_number' => '79998888',
-//            'age' => '34',
-//            'is_married' => false,
-//            'description' => 'some text',
-//        ];
-//
-//        $client = Client::create($clientsData);
-//
-//        $profileData = [
-//            'client_id' => $client->id,
-//            'skills' => 'Play basketball',
-//            'bio' => 'Ex sportsmen',
-//            'finished_study_at' => '2018-06-01',
-//        ];
-//
-//        $profile = Profile::create($profileData);
-//
-//        dd($profile->id);
+        ProjectWorker::create([
+            'project_id' => $project3->id,
+            'worker_id' => $workerManager->id,
+        ]);
+        ProjectWorker::create([
+            'project_id' => $project3->id,
+            'worker_id' => $workerDeveloper1->id,
+        ]);
+        ProjectWorker::create([
+            'project_id' => $project3->id,
+            'worker_id' => $workerDeveloper2->id,
+        ]);
 
     }
 }
