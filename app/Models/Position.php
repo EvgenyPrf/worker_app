@@ -15,4 +15,9 @@ class Position extends Model
     public function workers(){
         return $this->hasMany(Worker::class, 'position_id', 'id');
     }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id', 'id');
+    }
 }

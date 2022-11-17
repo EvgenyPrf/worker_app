@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Department;
 use App\Models\Position;
 use App\Models\Profile;
 use App\Models\Client;
@@ -17,7 +18,7 @@ class DevCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:develop';
+    protected $signature = 'develop';
 
     /**
      * The console command description.
@@ -33,9 +34,11 @@ class DevCommand extends Command
      */
     public function handle()
     {
-//        $this->prepareData();
-        $project = Project::find(3);
-        dd($project->workers->toArray());
+        //$this->prepareData();
+
+        $worker = Worker::find(6);
+
+        dd($worker-> position -> department -> toArray());
 
 
         return 0;
@@ -43,60 +46,79 @@ class DevCommand extends Command
 
     private function prepareData()
     {
-        $workerManager = Worker::find(5);
-        $workerDeveloper1 = Worker::find(7);
-        $workerDeveloper2 = Worker::find(8);
-
-
-        $project1 = Project::create([
-            'title' => 'Blog'
+        $department1 = Department::create([
+            'title' => 'IT'
         ]);
 
-        $project2 = Project::create([
-            'title' => 'Shop'
+        $department2 = Department::create([
+            'title' => 'Analytics'
         ]);
 
-        $project3 = Project::create([
-            'title' => 'Game'
+        $department3 = Department::create([
+            'title' => 'HR'
         ]);
 
-        ProjectWorker::create([
-            'project_id' => $project1->id,
-            'worker_id' => $workerManager->id,
-        ]);
-        ProjectWorker::create([
-            'project_id' => $project1->id,
-            'worker_id' => $workerDeveloper1->id,
-        ]);
-        ProjectWorker::create([
-            'project_id' => $project1->id,
-            'worker_id' => $workerDeveloper2->id,
+        $position1 = Position::create([
+            'title' => 'Developer',
+            'department_id' => $department1->id
         ]);
 
-        ProjectWorker::create([
-            'project_id' => $project2->id,
-            'worker_id' => $workerManager->id,
-        ]);
-        ProjectWorker::create([
-            'project_id' => $project2->id,
-            'worker_id' => $workerDeveloper1->id,
-        ]);
-        ProjectWorker::create([
-            'project_id' => $project2->id,
-            'worker_id' => $workerDeveloper2->id,
+        $position2 = Position::create([
+            'title' => 'Analytic',
+            'department_id' => $department2->id
         ]);
 
-        ProjectWorker::create([
-            'project_id' => $project3->id,
-            'worker_id' => $workerManager->id,
+        $position3 = Position::create([
+            'title' => 'Manager',
+            'department_id' => $department3->id
         ]);
-        ProjectWorker::create([
-            'project_id' => $project3->id,
-            'worker_id' => $workerDeveloper1->id,
+
+        $worker1 = Worker::create([
+            'name' => 'Galya',
+            'surname' => 'Popova',
+            'age' => '23',
+            'email' => 'galya@mail.ru',
+            'position_id' => $position3->id,
         ]);
-        ProjectWorker::create([
-            'project_id' => $project3->id,
-            'worker_id' => $workerDeveloper2->id,
+
+        $worker2 = Worker::create([
+            'name' => 'Sasha',
+            'surname' => 'Petrova',
+            'age' => '27',
+            'email' => 'sasha@mail.ru',
+            'position_id' => $position3->id,
+        ]);
+
+        $worker3 = Worker::create([
+            'name' => 'Petya',
+            'surname' => 'Ivanov',
+            'age' => '29',
+            'email' => 'petya@mail.ru',
+            'position_id' => $position1->id,
+        ]);
+
+        $worker4 = Worker::create([
+            'name' => 'Vasya',
+            'surname' => 'Pupkin',
+            'age' => '22',
+            'email' => 'vasya@mail.ru',
+            'position_id' => $position1->id,
+        ]);
+
+        $worker5 = Worker::create([
+            'name' => 'Sergey',
+            'surname' => 'Covrov',
+            'age' => '42',
+            'email' => 'sergo@mail.ru',
+            'position_id' => $position2->id,
+        ]);
+
+        $worker6 = Worker::create([
+            'name' => 'Elena',
+            'surname' => 'Pupkina',
+            'age' => '48',
+            'email' => 'pupochek@mail.ru',
+            'position_id' => $position2->id,
         ]);
 
     }
