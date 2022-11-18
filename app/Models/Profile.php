@@ -13,6 +13,6 @@ class Profile extends Model
     protected $guarded = false;
 
     public function client(){
-        return $this->belongsTo(Client::class, 'client_id', 'id');
+        return $this->belongsTo(Client::class);
     }
 }

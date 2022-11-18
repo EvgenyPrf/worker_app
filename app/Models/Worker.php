@@ -13,10 +13,10 @@ class Worker extends Model
     protected $guarded = false;
 
     public function position(){
-      return  $this->belongsTo(Position::class, 'position_id', 'id');
+      return  $this->belongsTo(Position::class);
     }
 
     public function projects(){
-        return $this->belongsToMany(Project::class, 'project_workers', 'worker_id', 'project_id');
+        return $this->belongsToMany(Project::class);
     }
 }
