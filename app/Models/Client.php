@@ -22,5 +22,11 @@ class Client extends Model
         static::created(function ($model){
             event(new CreatedEvent($model));
         });
+
+        static::updated(function ($model){
+            if($model->wasChanged()){
+                dd('EVENT!');
+            }
+        });
     }
 }
