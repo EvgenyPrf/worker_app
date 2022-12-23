@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             PositionSeeder::class,
             WorkerSeeder::class,
-            ProfileSeeder::class
+            ClientSeeder::class
         ]);
     }
 }
