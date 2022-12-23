@@ -36,9 +36,13 @@ class DevCommand extends Command
     {
         //$this->prepareData();
 
-        $worker = Worker::find(6);
+//        $worker = Worker::find(6);
+//
+//        dd($worker-> position -> department -> toArray());
 
-        dd($worker-> position -> department -> toArray());
+
+        $project = Project::find(1);
+        dd($project->workers->toArray());
 
 
         return 0;
