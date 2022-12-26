@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\SomeJob;
 use App\Models\Department;
 use App\Models\Position;
 use App\Models\Profile;
@@ -34,10 +35,7 @@ class DevCommand extends Command
      */
     public function handle()
     {
-        $client = Client::find(20);
-        $client->update([
-            'name' => 'Tobie'
-        ]);
+        SomeJob::dispatch()->onQueue('myFirstJob');
     }
 
 
