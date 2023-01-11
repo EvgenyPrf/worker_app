@@ -28,6 +28,7 @@ class WorkerController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Worker::class);
         return view('worker.create');
     }
 
@@ -39,6 +40,7 @@ class WorkerController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        $this->authorize('create', Worker::class);
         $data = $request->validated();
         Worker::create($data);
         return redirect()->route('workers.index');
@@ -59,11 +61,14 @@ class WorkerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(Worker $worker)
     {
+        $this->authorize('create', $worker);
+
         return view('worker.edit', compact('worker'));
 
     }
@@ -71,12 +76,15 @@ class WorkerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(UpdateRequest $request, Worker $worker)
     {
+        $this->authorize('create', $worker);
+
         $data = $request->validated();
         $worker->update($data);
         return redirect()->route('workers.show', $worker->id);
@@ -90,6 +98,8 @@ class WorkerController extends Controller
      */
     public function destroy(Worker $worker)
     {
+        $this->authorize('delete', $worker);
+
         $worker->delete();
         return redirect()->route('workers.index');
     }
