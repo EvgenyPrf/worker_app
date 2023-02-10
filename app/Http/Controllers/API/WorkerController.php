@@ -14,19 +14,19 @@ class WorkerController extends Controller
     public function index()
     {
         $workers = Worker::all();
-        return  WorkerResource::collection($workers)->resolve();
+        return  WorkerResource::collection($workers);
     }
 
     public function show(Worker $worker)
     {
-        return  WorkerResource::make($worker)-resolve();
+        return  WorkerResource::make($worker);
     }
 
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
         $worker = Worker::create($data);
-        return WorkerResource::make($worker)->resolve();
+        return WorkerResource::make($worker);
     }
 
     public function update(Worker $worker, UpdateRequest $request)
@@ -34,12 +34,12 @@ class WorkerController extends Controller
         $data = $request->validated();
         $worker->update($data);
         $worker->fresh();
-        return WorkerResource::make($worker)->resolve();
+        return WorkerResource::make($worker);
     }
 
     public function destroy(Worker $worker)
     {
         $worker->delete();
-        return WorkerResource::make($worker)->resolve();
+        return WorkerResource::make($worker);
     }
 }
