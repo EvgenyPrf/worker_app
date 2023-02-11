@@ -2,13 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\SomeJob;
-use App\Models\Department;
-use App\Models\Position;
-use App\Models\Profile;
-use App\Models\Client;
-use App\Models\Project;
-use App\Models\ProjectWorker;
+
+use App\Http\Filters\Var1\WorkerFilter;
 use App\Models\Worker;
 use Illuminate\Console\Command;
 
@@ -35,7 +30,7 @@ class DevCommand extends Command
      */
     public function handle()
     {
-        SomeJob::dispatch()->onQueue('myFirstJob');
+
     }
 
 

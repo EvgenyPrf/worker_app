@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Worker extends Model
 {
-    use HasFactory;
+    use HasFactory, HasFilter;
 
     protected $table = 'workers';
     protected $guarded = false;

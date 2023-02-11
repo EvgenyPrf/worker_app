@@ -24,6 +24,8 @@ class WorkerFactory extends Factory
             'age' => fake()->numberBetween(18, 65),
             'email' => fake()->unique()->safeEmail(),
             'position_id' => Position::inRandomOrder()->first()->id,
+            'description' => fake()->text(),
+            'is_married' => fake()->boolean(),
 
         ];
     }

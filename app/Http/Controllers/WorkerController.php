@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Filters\Var1\WorkerFilter;
 use App\Http\Requests\Worker\IndexRequest;
 use App\Http\Requests\Worker\StoreRequest;
 use App\Http\Requests\Worker\UpdateRequest;
 use App\Models\Worker;
+
 
 class WorkerController extends Controller
 {
@@ -14,10 +16,13 @@ class WorkerController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(IndexRequest $request)
     {
 
-        $workers = Worker::all();
+        $data = $request->validated();
+        $filter = new WorkerFilter($data);
+        $queryWorker = Worker::filter($filter);
+        $workers = $queryWorker->paginate(4)->withQueryString();
         return view('worker.index', compact('workers'));
     }
 
