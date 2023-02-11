@@ -3,10 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Filters\Var1\WorkerFilter;
+use App\Http\Filters\Var2\Worker\Age;
+use App\Http\Filters\Var2\Worker\AgeFrom;
+use App\Http\Filters\Var2\Worker\AgeTo;
+use App\Http\Filters\Var2\Worker\Description;
+use App\Http\Filters\Var2\Worker\Email;
+use App\Http\Filters\Var2\Worker\IsMarried;
+use App\Http\Filters\Var2\Worker\Name;
+use App\Http\Filters\Var2\Worker\Surname;
 use App\Http\Requests\Worker\IndexRequest;
 use App\Http\Requests\Worker\StoreRequest;
 use App\Http\Requests\Worker\UpdateRequest;
 use App\Models\Worker;
+use Illuminate\Pipeline\Pipeline;
 
 
 class WorkerController extends Controller
@@ -16,13 +25,21 @@ class WorkerController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index(IndexRequest $request)
+    public function index()
     {
-
-        $data = $request->validated();
-        $filter = new WorkerFilter($data);
-        $queryWorker = Worker::filter($filter);
-        $workers = $queryWorker->paginate(4)->withQueryString();
+        $workers = app()->make(Pipeline::class)
+            ->send(Worker::query())
+            ->through([
+                Name::class,
+                Surname::class,
+                AgeFrom::class,
+                AgeTo::class,
+                Email::class,
+                Description::class,
+                IsMarried::class,
+            ])
+            ->thenReturn();
+        $workers = $workers->paginate(4)->withQueryString();
         return view('worker.index', compact('workers'));
     }
 
